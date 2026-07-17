@@ -1,0 +1,35 @@
+AYE NAUTICAL SYSTEMS — PROPRIETARY SOURCE AVAILABLE LICENSE
+Copyright (c) 2026 AYE Nautical Systems. All rights reserved.
+
+This software and associated documentation files (the "Software"), including
+but not limited to the main firmware (.ino), the display BSP (display_bsp.cpp,
+display_bsp.h), the custom font files (lv_font_stretto_*.c), graphical assets
+(aye_logo.c, QR_AyeNautical_Mate.c), and all related header files, are the
+exclusive intellectual property of AYE Nautical Systems.
+
+PERMITTED:
+  - View and read the source code for reference and audit purposes.
+  - Fork and modify the code ONLY for personal, non-commercial use on
+    hardware officially purchased from AYE Nautical Systems.
+  - Submit bug reports and suggestions via the official GitHub issue tracker.
+
+NOT PERMITTED without prior written authorization from AYE Nautical Systems:
+  - Use, copy, or distribute the Software or any derivative for commercial
+    purposes.
+  - Redistribute the Software or any substantial portion of it.
+  - Use the Software to build competing products or services.
+  - Remove or alter any copyright, trademark, or attribution notices.
+  - Copy, adapt, or reuse the custom font files (lv_font_stretto_*.c) or
+    graphical assets in any other project, commercial or otherwise.
+  - Reverse-engineer the ESP-NOW protocol, display initialization sequence,
+    or cloud integration for purposes other than personal debugging on
+    officially purchased hardware.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+AYE NAUTICAL SYSTEMS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
+OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+For licensing inquiries and commercial use: ayenautical@gmail.com

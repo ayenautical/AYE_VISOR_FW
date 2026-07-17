@@ -1,0 +1,58 @@
+# =========================================================================
+# AYE VISOR FW — .gitignore
+# =========================================================================
+
+# ── CREDENZIALI E CONFIGURAZIONE LOCALE — MAI SU GITHUB ──────────────────
+secrets.h
+secrets.json
+.env
+.env.local
+*.env
+config/credentials.*
+
+# ── LOGICA OPERATIVA INTERNA — MAI SU GITHUB ─────────────────────────────
+CLAUDE.md
+CONTRIBUTING_INTERNAL.md
+*.internal.md
+
+# ── Build Arduino ─────────────────────────────────────────────────────────
+build/
+*.bin
+*.elf
+*.map
+/tmp/
+export/
+
+# ── Cache Arduino IDE / arduino-cli ───────────────────────────────────────
+.arduino15/
+core_*.a
+*.d
+*.o
+
+# ── macOS ──────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# ── Editor ─────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Log e debug ────────────────────────────────────────────────────────────
+*.log
+serial_log_*.txt
+
+# Asset font proprietari — non pubblicati (source available)
+lv_font_stretto_*.c
+
+# Doc interno — non pubblicato (contiene project-ref)
+RELEASE_CHECKLIST.md
+
+# duplicato senza punto — non committare
+gitignore
