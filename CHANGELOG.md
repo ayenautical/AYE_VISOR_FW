@@ -5,6 +5,81 @@ Formato: [SemVer](https://semver.org/) — MAJOR.MINOR.PATCH
 
 ---
 
+## [V45.6.1] — 2026-07-16
+### Fix
+- "POD offline dopo lo stop dal Visore": anti-scan esteso a `SCAN_GRACE_MS` (20s) oltre lo stop sessione. Prima `WiFi.scanNetworks()` cambiava canale radio mentre il POD era occupato nell'HTTPS di chiusura → POD spariva dalla web app 145-209s. Finestra one-shot; riaggancio dopo LINK LOST invariato.
+- Invariati: struct 22/108 byte, protocollo a stato.
+
+---
+
+## [V45.6.0] — 2026-07-16
+### Modificato (MINOR)
+- Sessione da COMANDO a STATO: il Visore dichiara `sessione_attiva` (0/1) ripetuto @10Hz invece dell'evento `cmd_sessione` (1/2). Uno stato è idempotente: pacchetti persi non fanno divergere la sessione.
+- ⚠ Flashare INSIEME al POD 2.6.0 (stesso campo, semantica diversa).
+- Fix latente: stato + TX avvengono prima del lock LVGL (uno stop poteva non raggiungere mai il POD).
+- Struct: `cmd_sessione` → `sessione_attiva` (int32_t); `struct_messaggio_visore` resta 22 byte, `struct_nautica` resta 108.
+### Rimosso
+- Latch `cmd_arm_time` + blocco sgancio 8s (non più necessario con lo stato).
+
+---
+
+## [V45.5.22] — 2026-07-16
+### Fix
+- Avvio sessione inviava `cmd=2` invece di `cmd=1`: rimossa la riga (introdotta in V45.5.21) che falsificava lo stato tasto in `execute_start()` → nessuna sessione veniva aperta a DB.
+
+---
+
+## [V45.5.20] — 2026-07-15
+### Fix
+- LINK LOST durante avvio sessione: con `session_active` niente `WiFi.scanNetworks()` bloccante; il Visore si riposiziona solo sul canale noto del POD.
+
+---
+
+## [V45.5.19] — 2026-07-15
+### Fix
+- Regressione V45.5.18: `pending_cloud_upload` bloccava `inviaDatiAlPod()` → POD scollegato in loop. Ora la TX ESP-NOW parte sempre con nuovi dati; il gate resta solo per il label UI.
+
+---
+
+## [V45.5.18] — 2026-07-15
+### Fix
+- Latch `cmd_sessione` fragile: timeout assoluto 8s (`cmd_arm_time`, ex `cmd_latch_time`) — prima il comando restava incollato e riapriva la sessione ogni 2s.
+- Trigger DB `gestisci_sessione_automatica`: aggiunto `avviata_da` (era NULL invece di `'visore'`) — migration SQL separata.
+- Documentati: cast `OnDataRecv` (ESP32 core 3.x) e Serial multi-core (mutex rinviato a V45.6.0).
+
+---
+
+## [V45.5.17] — 2026-07-15
+### Fix
+- Riaggancio via scan SSID `AYE_POD_NET` (max 1/3s) invece di hopping cieco 1..13: dà il canale esatto dell'AP del POD (che segue il router).
+
+---
+
+## [V45.5.16] — 2026-07-15
+### Fix
+- Hopping perpetuo dopo LINK LOST: se il canale del POD è noto il Visore resta parcheggiato lì (sweep completo solo se canale mai appreso o dopo 20s di grace).
+
+---
+
+## [V45.5.15] — 2026-07-15
+### Fix
+- Canale ESP-NOW TX: al primo pacchetto `canaleAttuale` allineato al canale RX reale (`esp_wifi_get_channel`) — prima `esp_now_send()` tornava OK senza consegnare.
+
+---
+
+## [V45.5.14] — 2026-07-15
+### Fix
+- Peer ESP-NOW: al primo pacchetto il peer viene ri-registrato col MAC reale del POD (non più il BSSID dell'AP); `esp_now_send()` ora controlla il valore di ritorno.
+
+---
+
+## [V45.5.13] — 2026-07-15
+### Fix
+- Filtro MAC sorgente in `OnDataRecv()`: pacchetti da MAC non abbinato scartati (`[RADIO-WARN]`).
+- Schermata 4 (DTW): decimali da 2 a 1 cifra.
+
+---
+
 ## [V45.5.12] — 2026-07-16
 ### Modificato
 - Screen 0: SOG, AWS, TWS in `stretto_80` (rimossi override `montserrat_16`)
